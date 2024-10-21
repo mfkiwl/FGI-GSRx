@@ -41,7 +41,7 @@ if (strcmp(signalSettings.modType,'TMBOC'))
     for i = 1:periodLengthInChips
         if i == 1 || i == 5 || i == 7 || i == 30
             for j = 1:mf
-                TMBOC((i-1)*mf + j) = -sign(sin(12*pi*j/mf));
+                TMBOC((i-1)*mf + j) = -sign(sin(pi*j));
             end
         else
             for j = 1:mf
