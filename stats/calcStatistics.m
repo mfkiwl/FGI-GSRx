@@ -33,12 +33,14 @@ function x=calcStatistics(nav,true,navSolPeriod,const)
 % Note that this function uses only lat, lon and height as input and calculates
 % all other coordinate transformations itself.
 
-ind = 1;
+ind = 0;
 
 % Get data to temporary structures
 
 for i=1:length(nav)
-    if (nav{i}.Pos.bValid==1)    
+    if (nav{i}.Pos.bValid==1)
+        ind = ind + 1;
+
         x.VX(ind) =nav{i}.Vel.xyz(1);        
         x.VY(ind) =nav{i}.Vel.xyz(2);        
         x.VZ(ind) =nav{i}.Vel.xyz(3);
@@ -54,10 +56,12 @@ for i=1:length(nav)
         x.height(ind) =nav{i}.Pos.LLA(3);        
         dop(ind,:) =nav{i}.Pos.dop;            
         fom(ind) =nav{i}.Pos.fom;          
-        nSat(ind)=sum(nav{i}.Pos.nrSats);
-        ind = ind +1;        
+        nSat(ind)=sum(nav{i}.Pos.nrSats); 
     end    
 end
+
+nrOfValidEpochs = ind;
+
 % Set true position
 x.trueLat=true(1);
 x.trueLong=true(2);
@@ -73,7 +77,7 @@ x.truez = xyz(3);
 smoothingInterval = 1000/navSolPeriod;
 
 j=1;
-for i=1:smoothingInterval:length(nav)-smoothingInterval
+for i=1:smoothingInterval:nrOfValidEpochs-smoothingInterval
     X(j) =mean(x.X(i:i+smoothingInterval-1)); 
     Y(j) =mean(x.Y(i:i+smoothingInterval-1)); 
     Z(j) =mean(x.Z(i:i+smoothingInterval-1));     
