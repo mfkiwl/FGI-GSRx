@@ -34,8 +34,9 @@ function [obs, sat, navSolution] = getNavSolution(obs, sat, navSolution, allSett
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Init temporary variables
-[Pos, Vel, Time] = initPosVel(navSolution);
+% Init Pos and Vel with those from the previous epoch
+Pos = navSolution.Pos;
+Vel = navSolution.Vel;
 
 % Check if we have enough observations for a nav solution
 trynav = checkIfNavIsPossible(obs, allSettings);
