@@ -40,9 +40,9 @@ sys,msToSkip,20e3,             % Number of ms to skip from beginning of file
 
 % Input/Output file names
 sys,loadDataFile,false,     % Defines if data file is to be loaded
-sys,dataFileIn,"",          % Datafile to load of enabled
+sys,dataFileIn,"",          % Data file to load if enabled
 sys,saveDataFile,false,     % Defines if data should be stored to file
-sys,dataFileOut,'',  % Data file for storing output
+sys,dataFileOut,'',         % Data file for storing output if enabled
 sys,loadIONMetaDataReading,false,
 sys,metaDataFileIn,''
 
@@ -90,7 +90,7 @@ gpsl1,samplingFreq,26e6, % Sampling frequency [Hz]
 gpsl1,bandWidth,10e6, % Bandwidth of the front end [Hz]
 gpsl1,sampleSize,16, % Number of bits for one sample. For complex data this is the size for I+Q.
 gpsl1,complexData,true, % Complex or real data
-gpsl1,iqSwap,true, % Complex or real data
+gpsl1,iqSwap,true, % Is the data IQ-swapped (QI) or not (IQ)?
 
 % Acquisition parameters
 gpsl1,acqSatelliteList,[1:32],       % Specify what GPS satellites to search for [PRN numbers]          
@@ -144,10 +144,10 @@ gpsl1c,samplingFreq,25e6                % Sampling frequency [Hz]
 gpsl1c,bandWidth,20e6,                  % Bandwidth of the front end [Hz]
 gpsl1c,sampleSize,32,                   % Number of bits for one sample. For complex data this is the size for I+Q.
 gpsl1c,complexData,true,                % Complex or real data
-gpsl1c,iqSwap,false,                    % Complex or real data
+gpsl1c,iqSwap,false,                    % Is the data IQ-swapped (QI) or not (IQ)?
 
 %Signal Modulation
-gpsl1c,modType,'TMBOC', 		% Can take input either of the two types: 'TMBOC' or 'SinBOC'
+gpsl1c,modType,'TMBOC', 			    %Can take input either of the two types: 'TMBOC' or 'SinBOC'
 
 % Acquisition parameters
 gpsl1c,acqSatelliteList,[1:32],         % Specify what GPS satellites to search for [PRN numbers]          
@@ -200,7 +200,7 @@ gale1b,samplingFreq,26e6,           % Sampling frequency [Hz]
 gale1b,bandWidth,10e6,              % Bandwidth of the front end [Hz]
 gale1b,sampleSize,16,               % Number of bits for one sample. For complex data this is the size for I+Q.
 gale1b,complexData,true,            % Complex or real data
-gale1b,iqSwap,true, 
+gale1b,iqSwap,true,                 % Is the data IQ-swapped (QI) or not (IQ)?
 
 %Signal Modulation
 gale1b,modType,'CBOC', 			%Can take input either of the two types: 'CBOC' or 'SinBOC'
@@ -254,7 +254,7 @@ gale1c,samplingFreq,26e6,           % Sampling frequency [Hz]
 gale1c,bandWidth,4.2e6,              % Bandwidth of the front end [Hz]
 gale1c,sampleSize,8,               % Number of bits for one sample. For complex data this is the size for I+Q.
 gale1c,complexData,false,            % Complex or real data
-gale1c,iqSwap,false, 
+gale1c,iqSwap,false,                % Is the data IQ-swapped (QI) or not (IQ)?
 
 %Signal Modulation
 gale1c,modType,'CBOC', 			%Can take input either of the two types: 'CBOC' or 'SinBOC'
@@ -308,7 +308,7 @@ beib1,samplingFreq,26e6,            % Sampling frequency [Hz]
 beib1,bandWidth,8e6,               % Bandwidth of the front end [Hz]
 beib1,sampleSize,8,                % Number of bits for one sample. For complex data this is the size for I+Q.
 beib1,complexData,false,             % Complex or real data
-beib1,iqSwap,false, 	            % Complex or real data
+beib1,iqSwap,false, 	            % Is the data IQ-swapped (QI) or not (IQ)?
 
 % Acquisition parameters
 beib1,acqSatelliteList,[1:35],       % Specify what GPS satellites to search for [PRN numbers]          
@@ -362,7 +362,7 @@ glol1,samplingFreq,81e6,            % Sampling frequency [Hz]
 glol1,bandWidth,54e6,               % Bandwidth of the front end [Hz]
 glol1,sampleSize,16,                % Number of bits for one sample. For complex data this is the size for I+Q.
 glol1,complexData,true,             % Complex or real data
-glol1,iqSwap,false, 
+glol1,iqSwap,false,                 % Is the data IQ-swapped (QI) or not (IQ)?
 
 % Acquisition parameters
 glol1,acqSatelliteList,[1:14],        % Specify what GPS satellites to search for [PRN numbers]          
@@ -416,7 +416,7 @@ navicl5,samplingFreq,26e6,            % Sampling frequency [Hz]
 navicl5,bandWidth,10e6,               % Bandwidth of the front end [Hz]
 navicl5,sampleSize,16,                % Number of bits for one sample. For complex data this is the size for I+Q.
 navicl5,complexData,true,             % Complex or real data
-navicl5,iqSwap,true, 
+navicl5,iqSwap,true,                  % Is the data IQ-swapped (QI) or not (IQ)?
 
 % Acquisition parameters
 navicl5,acqSatelliteList,[1],        % Specify what GPS satellites to search for [PRN numbers]          
