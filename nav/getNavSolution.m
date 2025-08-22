@@ -67,11 +67,7 @@ if (trynav)
     obs = updateObservations(obs, Pos, Vel, allSettings);
 
     % Coordinate conversion 
-    [Pos.LLA(1),Pos.LLA(2),Pos.LLA(3)] = wgsxyz2lla(allSettings.const, Pos.xyz);
-
-    % TBA enu calculations
-    %[reflat,reflon,refalt] = wgsxyz2lla([settings.truePosition.X settings.truePosition.Y settings.truePosition.Z]);
-    %navSolution.LSE.enu = wgsxyz2enu(navSolution.LSE.Pos.XYZ(1:3), reflat, reflon, refalt);    
+    [Pos.LLA(1),Pos.LLA(2),Pos.LLA(3)] = wgsxyz2lla(allSettings.const, Pos.xyz);  
 
     % Update time estimates from fix
     Time = updateReceiverTime(Pos, obs, allSettings);
@@ -98,7 +94,6 @@ else
     navSolution.Time.receiverTow = NaN;
     
     navSolution.LSE.LLA  = [0 0 0];
-    navSolution.LSE.enu  = [0 0 0];
     navSolution.Klm.LLA  = [0 0 0];
 
 end
