@@ -41,27 +41,11 @@ function [obs, sat, navSolution] = getNavSolution(obs, sat, navSolution, allSett
 trynav = checkIfNavIsPossible(obs, allSettings);
 
 if (trynav)
-    
-    Pos.xyz = navSolution.Pos.xyz;
-    Pos.bValid = false;
-    Vel.xyz = navSolution.Vel.xyz;
-    Vel.bValid = false;
-    
     % Calculate receiver position 
-    [Pos] = calcPosLSE(obs, sat, allSettings, Pos); 
-    
-    % Update if valid
-    if(Pos.bValid == true)
-        navSolution.Pos = Pos;
-    end
-  
-    % Calculate receiver velocity solution
-    [Vel] = calcVelLSE(obs, sat, allSettings, Vel, Pos);   
+    Pos = calcPosLSE(obs, sat, allSettings, Pos);
 
-    % Update if valid
-    if(Vel.bValid == true)
-        navSolution.Vel = Vel;
-    end
+    % Calculate receiver velocity solution
+    Vel = calcVelLSE(obs, sat, allSettings, Vel, Pos);
     
     % Update observation structure
     obs = updateObservations(obs, Pos, Vel, allSettings);
@@ -77,31 +61,30 @@ else
     disp(': Not enough information for position solution.');
 
     % Copy whatever data we have and set rest to NaN
-    nrOfSignals = allSettings.sys.nrOfSignals;
-    lengthdop=4+nrOfSignals;
-    navSolution.LSE.Pos.XYZ  = [0 0 0];
-    navSolution.LSE.Pos.dt  = NaN;
-    navSolution.LSE.Pos.fom  = NaN;
-    navSolution.LSE.DOP  = zeros(1,lengthdop);
-    navSolution.LSE.Vel.XYZ  = [0 0 0];
-    navSolution.LSE.Vel.df  = NaN;
-    navSolution.LSE.Vel.fom  = NaN;
-    navSolution.LSE.Systems  = NaN;        
-    navSolution.LSE.FixStatus  = 'LKG';    
-    navSolution.Klm.FixStatus  = 'LKG';        
-    navSolution.nrSatUsed = 0;  
-    navSolution.totalSatUsed = 0;
-    navSolution.Time.receiverTow = NaN;
-    
-    navSolution.LSE.LLA  = [0 0 0];
-    navSolution.Klm.LLA  = [0 0 0];
+    lengthdop = 4 + allSettings.sys.nrOfSignals;
 
+    Pos.xyz  = zeros(1,3);
+    Pos.LLA = zeros(1, 3);
+    Pos.fom = NaN;
+    Pos.dop = zeros(1, lengthdop);
+    Pos.trueRange = NaN;
+    Pos.rangeResid = NaN;
+    Pos.nrSats = NaN;
+    Pos.dt = NaN;
+    Pos.bValid = false;
+    Pos.Flag = NaN;
+    Pos.signals = NaN;
+
+    Vel.xyz = zeros(1,3);
+    Vel.fom = NaN;
+    Vel.dopplerResid = NaN;
+    Vel.nrSats = NaN;
+    Vel.df = NaN;
+    Vel.bValid = false;
+
+    Time.receiverTow = NaN;
 end
 
 navSolution.Pos = Pos;
 navSolution.Vel = Vel;
 navSolution.Time = Time;
-
-% TBA This is the sample count for this epoch and for this fix
-%navSolution.sampleCount = obsSingle.sampleCount;
-
