@@ -44,10 +44,6 @@ bInit = true;
 %depending on the correction type (for ionosphere, it can be broadcast iono data to be applied to generate ionosphere correction data)         
 [corrInputData] = generateCorrectionInputData(obsData,ephData, allSettings);
 
-
-% Index for nav solution
-fixIndex = 1;
-
 % Loop over all epochs
 for currMeasNr = 1:nrOfEpochs
     
@@ -93,11 +89,20 @@ for currMeasNr = 1:nrOfEpochs
     % Update output to UI 
     showNavStatus(allSettings, currMeasNr, navData, obsData, satData);
     
-    % Copy to new structure that holds data for all measuremenet epochs
-    obs{fixIndex} = obsData;
-    sat{fixIndex} = satData;
-    nav{fixIndex} = navData;
+    % Create a copy of obsData to be saved
+    obsToSave = obsData;
 
-    fixIndex = fixIndex + 1;
-     
+    % Loop over all signals
+    for i = 1:allSettings.sys.nrOfSignals
+        % Fetch signal acronym
+        signal = allSettings.sys.enabledSignals{i};
+        
+        % Remove some redundant fields from the channels (satellites)
+        obsToSave.(signal).channel = rmfield(obsData.(signal).channel, {'CN0', 'codePhase', 'sampleCount', 'carrFreq'});
+    end
+
+    % Copy to new structure that holds data for all measuremenet epochs
+    obs{currMeasNr} = obsToSave;
+    sat{currMeasNr} = satData;
+    nav{currMeasNr} = navData;
 end
