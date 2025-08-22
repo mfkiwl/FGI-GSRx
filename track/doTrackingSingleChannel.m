@@ -21,7 +21,8 @@ function doTrackingSingleChannel(acqData,trackResults, allSettings)
 % This function takes input of acquisition results and performs tracking.
 %
 % Inputs:
-%   acqResults      - Results from signal acquisition for all signals
+%   acqData         - Results from signal acquisition for all signals
+%   trackResults    - Results from signal tracking for all signals
 %   allSettings     - Receiver settings
 %
 % Outputs:
@@ -45,7 +46,7 @@ index= strcmp(saveEnabledSignals,signal);
 allSettings.sys.enabledSignals = saveEnabledSignals{index};
 
 % Open file for reading    
-[fid, message] = fopen(signalSettings.rfFileName, 'rb');
+[fid, ~] = fopen(signalSettings.rfFileName, 'rb');
 if (fid == -1)
     error('Failed to open data file for tracking!');
     return;    

@@ -23,6 +23,7 @@ function trackChannelData = beiDouGEOBitSync(trackChannelData,loopCnt)
 %
 %   Inputs:
 %       trackChannelData - track data for one channel
+%       loopCnt          - the number of ms processed
 %
 %   Outputs:
 %       trackChannelData - track data for one channel
@@ -61,4 +62,3 @@ if isempty(phaseChangeIndices)==0
         end            
     end        
 end    
-

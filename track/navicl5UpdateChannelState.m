@@ -42,8 +42,6 @@ elseif (trackChannelData.fllLockIndicator(loopCnt)>=trackChannelData.fllWideBand
 elseif (trackChannelData.bitSync ==1 && trackChannelData.fllLockIndicator(loopCnt)>=trackChannelData.fllNarrowBandLockIndicatorThreshold && ...
         trackChannelData.pllLockIndicator(loopCnt)>=trackChannelData.pllNarrowBandLockIndicatorThreshold)
     trackChannelData.trackState = 'STATE_FINE_TRACKING';
-else
-    ;
 end
 
 
@@ -55,4 +53,3 @@ trackChannelData.bInited = true;
 
 % Copy updated local variables
 tR.channel(ch) = trackChannelData;
-

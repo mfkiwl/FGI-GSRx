@@ -21,6 +21,7 @@ function [tR]  = carrierMixing(signalSettings,tR, ch, pRfData)
 % Carrier and code mixing (correlation)
 %
 % Inputs:
+%   signalSettings  - Settings for one signal
 %   tR              - Results from signal tracking for one signals
 %   ch              - Channel index
 %   pRfData         - RF data from file
@@ -49,7 +50,7 @@ time    = (0:blockSize) ./ signalSettings.samplingFreq;
 trigarg = -((carrFreq * 2.0 * pi) .* time) + carrPhase;
 
 % Compute the carrier replica signal
-carrSignal = exp(i .* trigarg(1:blockSize));
+carrSignal = exp(1i .* trigarg(1:blockSize));
 
 % Mix signal to baseband
 iBasebandSignal = real(carrSignal .* pRfData);
@@ -77,6 +78,3 @@ trackChannelData.iBasebandSignal = iBasebandSignal;
 
 % Copy updated local variables
 tR.channel(ch) = trackChannelData;
-
-
-

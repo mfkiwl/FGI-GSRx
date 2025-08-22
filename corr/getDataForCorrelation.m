@@ -22,6 +22,7 @@ function [tR, rawSignal] = getDataForCorrelation(fid,signalSettings,tR,ch)
 %
 % Inputs:
 %   fid             - RF file identifier
+%   signalSettings  - Settings for one signal
 %   tR              - Results from signal tracking for one signals
 %   ch              - Channel index
 %

@@ -19,15 +19,15 @@
 function  corrInputData = generateCorrectionInputData(obs,ephData,allSettings)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % This function takes input of tracking results and generates
-% observations for the navigation
+% correction input data
 %
 % Inputs:
 %   obs             - Observation data
-%   ephData              - ephemeris data
+%   ephData         - ephemeris data
 %   allSettings     - Receiver settings
 %
 % Outputs:
-%   corrInputData      - correction data which can be applied for different
+%   corrInputData   - correction data which can be applied for different
 %   corrections depeding on the model type
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -88,8 +88,6 @@ for signalIndex = 1:allSettings.sys.nrOfSignals
                 corrInputData.iono.glol1.beta3 = 0;                
             elseif strcmp(signalSettings.ionomodel,'ionex')==1   %Ionex processing
                 corrInputData.iono.ionex.tecTables = parseIonex(signalSettings.ionexFile);
-            else
-                ;
             end   
         end
     end

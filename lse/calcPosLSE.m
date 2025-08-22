@@ -24,7 +24,7 @@ function Pos = calcPosLSE(obs, sat, allSettings, Pos)
 %   obs             - Observations for one epoch
 %   sat             - Satellite positions and velocities for one epoch
 %   allSettings     - receiver settings
-%   pos             - Initial position for the LSE 
+%   Pos             - Initial position for the LSE 
 %
 % Outputs:
 %   Pos             - receiver position and receiver clock error
@@ -102,8 +102,6 @@ for iter = 1:nmbOfIterations
     end
      
     % This is the actual solutions to the LSE optimisation problem
-    clear H;
-    clear dR;    
     H=sv_matrix;%(1:5,:);
     dR=omp.dRange;%(1:5);
     DeltaPos=(H'*H)^(-1)*H'*dR';
@@ -135,8 +133,3 @@ Pos.fom = norm(Res/length(Res));
 if(Pos.fom < 50)
     Pos.bValid = true;
 end
- 
- 
- 
-
-

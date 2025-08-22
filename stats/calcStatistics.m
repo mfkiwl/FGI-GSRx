@@ -83,7 +83,7 @@ for i=1:smoothingInterval:length(nav)-smoothingInterval
     noOfUsedSat(j) =mean(nSat(i:i+smoothingInterval-1));
     j=j+1;
 end
-clear x.X; clear x.Y; clear x.Z; clear x.latitude; clear x.longitude; clear x.height;
+
 x.X = X;
 x.Y = Y;
 x.Z = Z;
@@ -274,9 +274,9 @@ x.ppp.true.dev_cep95_u = a(x.Index95);
 x.ppp.true.dev_max_u = max(abs(su));
 
 figure;
-plot([1:1:length(x.se)],x.se,'b-*'); hold on; grid on;
-plot([1:1:length(x.sn)],x.sn,'g-+'); 
-plot([1:1:length(x.su)],x.su,'r-o');  
+plot(1:1:length(x.se),x.se,'b-*'); hold on; grid on;
+plot(1:1:length(x.sn),x.sn,'g-+'); 
+plot(1:1:length(x.su),x.su,'r-o');  
 legend('E','N','U');
 xlabel('Time (s)');
 ylabel('Deviation (m)');

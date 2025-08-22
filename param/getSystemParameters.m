@@ -53,8 +53,6 @@ if settings.sys.loadIONMetaDataReading==1
                     settings.(signal).complexData = false;
                     settings.(signal).iqSwap = false;
                     settings.(signal).sampleSize = metaData.sampleSizeInBytes*8*1; % Sample size for real sample in bits
-                else
-                    ;
                 end
             end
         end
@@ -245,4 +243,3 @@ for i = 1:settings.sys.nrOfSignals
 
     disp(strcat(signal,' Enabled'));
 end
-

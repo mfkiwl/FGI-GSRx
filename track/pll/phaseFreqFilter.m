@@ -21,6 +21,7 @@ function tR = phaseFreqFilter(signalSettings,tR,ch)
 % Last Loop filter 
 %
 % Inputs:
+%   signalSettings - Settings for one signal
 %   tR             - Results from signal tracking for one signals
 %   ch             - Channel index
 %
@@ -89,4 +90,3 @@ trackChannelData.doppler(loopCnt)           = carrFreq - trackChannelData.interm
 
 % Copy updated local variables
 tR.channel(ch) = trackChannelData;
-

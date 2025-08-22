@@ -21,6 +21,7 @@ function [tR]= GNSSCorrelation(signalSettings, tR, ch)
 % Performs code and carrier correlation for GNSS data
 %
 % Inputs:
+%   signalSettings - Settings for one signal
 %   tR             - Results from signal tracking for one signals
 %   ch             - Channel index
 %
@@ -37,7 +38,7 @@ loopCnt = tR.loopCnt;
 [tR, rawSignal] = getDataForCorrelation(fid,signalSettings,tR,ch);
 
 % Generate finger data
-[fingers,tR] = corrFingerGeneration(signalSettings,tR,ch);
+[~,tR] = corrFingerGeneration(signalSettings,tR,ch);
 
 % Carrier generation + correlation and mixing with code signal
 tR = carrierMixing(signalSettings,tR,ch, rawSignal);

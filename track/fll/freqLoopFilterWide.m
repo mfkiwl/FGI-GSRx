@@ -21,6 +21,7 @@ function tR = freqLoopFilterWide(signalSettings,tR,ch)
 % Wide bandwidth FLL loop filter for pull-in for all signals
 %
 % Inputs:
+%   signalSettings - Settings for one signal
 %   tR             - Results from signal tracking for one signals
 %   ch             - Channel index
 %
@@ -31,7 +32,6 @@ function tR = freqLoopFilterWide(signalSettings,tR,ch)
 
 % Set local variables
 trackChannelData = tR.channel(ch);
-loopCnt = tR.loopCnt;
 BWFLL = trackChannelData.fllNoiseBandwidthWide;
 dampingRatioFLL = trackChannelData.fllDampingRatio;
 loopGainFLL = trackChannelData.fllLoopGain;
@@ -65,4 +65,3 @@ trackChannelData.prevIR11 = IR11;
 
 % Copy updated local variables
 tR.channel(ch) = trackChannelData;
-
