@@ -83,7 +83,7 @@ for iter = 1:nmbOfIterations
                 sv_matrix(ind,3+signalNr) = 1;
                 
                 relative_velocity(ind) = dx * sat.(signal).channel(channelNr).Vel(1) + dy * sat.(signal).channel(channelNr).Vel(2) + dz * sat.(signal).channel(channelNr).Vel(3);
-                relative_velocity(ind) = relative_velocity(ind) / sqrt(dx*dx+dy*dy+dz*dz);
+                relative_velocity(ind) = relative_velocity(ind) / range(ind);
 
                 % Observed minus predicted
                 omp.dRange_rate(ind) = pseudo_range_rate(ind) + relative_velocity(ind) + sat.(signal).channel(channelNr).Vel(4) * SPEED_OF_LIGHT;
@@ -113,7 +113,7 @@ end
 
 % Copying data to output data structure
 Vel.dopplerResid = Res;
-Vel.nrSats = nrSatsUsed;
+Vel.nrSats = diff([0 nrSatsUsed]);
 Vel.xyz = vel(1:3);
 Vel.df = vel(4:end);
 Vel.fom = norm(Res/length(Res));
