@@ -134,14 +134,14 @@ for PRN = signalSettings.acqSatelliteList
                           excludeRangeIndex2 : samplesPerCode];
     end
     
-    % Calculate baseline and variance for data outside peak
-    variance = std(results(frequencyBinIndex,codePhaseRange));    
+    % Calculate baseline and standard deviation for data outside peak
+    standardDev = std(results(frequencyBinIndex,codePhaseRange));    
     baseline = mean(results(frequencyBinIndex,codePhaseRange));
-    peakMetric = (peakSize-baseline)/variance;
+    peakMetric = (peakSize-baseline)/standardDev;
 
     acqResults.channel(chIndex).peakMetric = peakMetric;
     acqResults.channel(chIndex).peakValue = peakSize;    
-    acqResults.channel(chIndex).variance = variance;
+    acqResults.channel(chIndex).standardDev = standardDev;
     acqResults.channel(chIndex).baseline = baseline;
     acqResults.channel(chIndex).SvId.satId = PRN;  
     acqResults.signal = signalSettings.signal;
